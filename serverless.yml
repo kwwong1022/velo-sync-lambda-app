@@ -4,7 +4,23 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: nodejs18.x
+  timeout: 30
+  region: ap-east-1
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: '*'
 
 functions:
-  function1:
+  app:
     handler: index.handler
+    
+    
