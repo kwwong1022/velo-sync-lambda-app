@@ -1,4 +1,4 @@
-module.exports.handler = async (event) => {
+module.exports.app = async (event) => {
   return {
     statusCode: 200,
     body: JSON.stringify(

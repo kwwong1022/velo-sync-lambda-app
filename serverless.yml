@@ -1,4 +1,4 @@
-service: velo-sync-lambda
+service: velo-sync-lambda-app
 frameworkVersion: '3'
 
 provider:
@@ -21,6 +21,6 @@ provider:
 
 functions:
   app:
-    handler: index.handler
-    
-    
+    handler: index.app
+    name: velo-sync-lambda-app-${sls:stage}
+  
