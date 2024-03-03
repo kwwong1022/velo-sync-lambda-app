@@ -21,6 +21,6 @@ provider:
 
 functions:
   app:
-    handler: index.app
+    handler: index.handler
     name: velo-sync-lambda-app-${sls:stage}
   
