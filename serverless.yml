@@ -23,4 +23,7 @@ functions:
   app:
     handler: index.handler
     name: velo-sync-lambda-app-${sls:stage}
-  
+    events:
+      - httpApi:
+          method: GET
+          path: /status

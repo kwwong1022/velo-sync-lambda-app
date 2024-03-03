@@ -1,10 +1,10 @@
-const serverless = require('serverless-http')
 const express = require('express')
+const serverless = require('serverless-http')
 const { StatusCodes } = require('http-status-codes')
 const router = require('./src/router')
 const app = express()
 
-app.use('/', router)
+app.use('/api/', router)
 
 // Comment if testing on localhost
 // module.exports.handler = serverless(app)
