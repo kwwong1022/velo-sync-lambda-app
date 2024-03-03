@@ -35,6 +35,9 @@ functions:
       - httpApi:
           method: POST
           path: /s3/generate-signed-url
+      - httpApi:
+          method: POST
+          path: /video/process
 
 resources:
   Resources:

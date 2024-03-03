@@ -3,6 +3,7 @@ const { StatusCodes } = require('http-status-codes')
 const { getSignedUploadUrl } = require('../lib/common')
 
 const router = express.Router()
+router.use('/video', require('./video'))
 
 /**
  * /status:
@@ -27,19 +28,6 @@ router.post('/s3/generate-signed-url', async (req, res) => {
         success: true,
         message: 'Signed URL generated successfully.',
         data: { signedUrl },
-    })
-})
-
-/**
- * /process-video:
- *   post:
- *     description: Triggers video processing
- */
-router.post('/process-video', async (req, res) => {
-    res.status(StatusCodes.OK).json({
-        success: true,
-        message: 'Video processing job triggered successfully',
-        data: null,
     })
 })
 
