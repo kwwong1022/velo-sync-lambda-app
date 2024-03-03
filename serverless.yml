@@ -34,7 +34,7 @@ functions:
           path: /status
       - httpApi:
           method: POST
-          path: /s3/upload
+          path: /s3/generate-signed-url
 
 resources:
   Resources:

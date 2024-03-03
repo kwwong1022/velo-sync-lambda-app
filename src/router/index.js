@@ -1,6 +1,6 @@
 const express = require('express')
 const { StatusCodes } = require('http-status-codes')
-const multer = require('multer')
+const { getSignedUploadUrl } = require('../lib/common')
 
 const router = express.Router()
 
@@ -19,9 +19,14 @@ router.get('/status', (req, res) => {
  *     description: Generate signed s3 url for uploading file
  */
 router.post('/s3/generate-signed-url', async (req, res) => {
+    const { filename } = req.body
+
+    const signedUrl = await getSignedUploadUrl(filename)
+
     res.status(StatusCodes.OK).json({
         success: true,
-        data: "success"
+        message: 'Signed URL generated successfully.',
+        data: { signedUrl },
     })
 })
 
@@ -33,7 +38,8 @@ router.post('/s3/generate-signed-url', async (req, res) => {
 router.post('/process-video', async (req, res) => {
     res.status(StatusCodes.OK).json({
         success: true,
-        data: "success"
+        message: 'Video processing job triggered successfully',
+        data: null,
     })
 })
 
