@@ -4,7 +4,6 @@
     "dotenv": "^16.4.5",
     "express": "^4.18.3",
     "http-status-codes": "^2.3.0",
-    "multer": "^1.4.5-lts.1",
     "serverless-http": "^3.2.0"
   },
   "name": "velo-sync-lambda-app",
