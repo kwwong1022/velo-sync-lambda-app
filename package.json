@@ -12,7 +12,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "node index.js",
+    "deploy:dev": "sls deploy",
+    "deploy:prod": "sls deploy --stage prod"
   },
   "repository": {
     "type": "git",
