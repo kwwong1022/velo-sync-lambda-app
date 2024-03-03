@@ -17,6 +17,11 @@ provider:
             - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
+            - dynamodb:BatchWriteItem
+            - s3:GetObject
+            - s3:GetObjectAcl
+            - s3:PutObject
+            - s3:PutObjectAcl
           Resource: '*'
 
 functions:
@@ -27,3 +32,25 @@ functions:
       - httpApi:
           method: GET
           path: /status
+      - httpApi:
+          method: POST
+          path: /s3/upload
+
+resources:
+  Resources:
+    VeloSyncVideoBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: velo-sync-video-bucket-${sls:stage}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedOrigins:
+                - '*'
+              AllowedHeaders:
+                - '*'
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - HEAD
+              MaxAge: 3000
