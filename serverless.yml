@@ -42,10 +42,10 @@ functions:
 
 resources:
   Resources:
-    VeloSyncVideoBucket:
+    VeloSyncStorageBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: velo-sync-video-bucket-${sls:stage}
+        BucketName: velo-sync-storage-bucket-${sls:stage}
         CorsConfiguration:
           CorsRules:
             - AllowedOrigins:

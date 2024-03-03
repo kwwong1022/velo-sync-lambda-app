@@ -3,13 +3,13 @@ const { PutObjectCommand } = require("@aws-sdk/client-s3")
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner")
 
 const { 
-    S3_VIDEO_BUCKET, 
+    S3_STORAGE_BUCKET, 
     SIGNED_URL_EXPIRY_TIME 
 } = require('../constant')
 
 const getSignedUploadUrl = async (fileName) => {
     const command = new PutObjectCommand({
-        Bucket: S3_VIDEO_BUCKET,
+        Bucket: S3_STORAGE_BUCKET,
         Key: fileName,
     })
 
