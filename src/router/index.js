@@ -29,7 +29,7 @@ router.post('/s3/upload', upload.single('file'), async (req, res) => {
 
     const params = {
         Bucket: `velo-sync-video-bucket-${process.env.ENV}`,
-        Key: `${new Date(Date.now()).toString()}.png`,
+        Key: req.file.originalname,
         Body: req.file.buffer,
         ContentType: req.filter.mimetype,
     }
