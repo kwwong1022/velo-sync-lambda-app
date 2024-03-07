@@ -1,12 +1,12 @@
 require('dotenv').config()
 
-const stage = process.env.STAGE
+const STAGE = process.env.STAGE
 
-const S3_STORAGE_BUCKET = `velo-sync-storage-bucket-${stage}`
+const S3_STORAGE_BUCKET = `velo-sync-storage-bucket-${STAGE}`
 
 const SIGNED_URL_EXPIRY_TIME = 900
 
-const LAMBDA_VIDEO_PROCESSOR = `velo-sync-video-processor-${stage}`
+const LAMBDA_VIDEO_PROCESSOR = `velo-sync-video-processor-${STAGE}`
 
 module.exports = {
     S3_STORAGE_BUCKET,
