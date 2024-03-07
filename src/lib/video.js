@@ -1,8 +1,35 @@
 const lambda = require('../util/lambdaClient')
-const { InvokeCommand } = require("@aws-sdk/client-lambda");
-const { LAMBDA_VIDEO_PROCESSOR } = require('../constant')
+const dynamoDb = require('../util/dynamoDbClient')
+const { InvokeCommand } = require("@aws-sdk/client-lambda")
+const { PutItemCommand } = require("@aws-sdk/client-dynamodb")
 
-const invokeVideoProcessor = async () => {
+const { 
+    LAMBDA_VIDEO_PROCESSOR,
+    VIDEO_PROCESS_TABLE
+} = require('../constant')
+
+const createVideoProcessJob = async (processId, userId, videoKey, gpxKey, styleKey) => {
+    const createdDate = new Date(Date.now()).toISOString()
+
+    const item = {
+        id: { S: processId },
+        userId: { S: userId },
+        videoKey: { S: videoKey },
+        gpxKey: { S: gpxKey },
+        styleKey: { S: styleKey },
+        createdDate: { S: createdDate },
+    }
+
+    const command = new PutItemCommand({
+        TableName: VIDEO_PROCESS_TABLE,
+        Item: item,
+    })
+    
+    const response = await dynamoDb.send(command)
+    return response
+}
+
+const invokeVideoProcessor = async (processId) => {
     const params = {
         FunctionName: LAMBDA_VIDEO_PROCESSOR,
         InvocationType: "Event",
@@ -14,5 +41,6 @@ const invokeVideoProcessor = async () => {
 }
 
 module.exports = {
+    createVideoProcessJob,
     invokeVideoProcessor
 }

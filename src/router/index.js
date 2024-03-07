@@ -41,6 +41,7 @@ router.post('/s3/generate-signed-url', async (req, res) => {
         message = `System call [getSignedUploadUrl] failed. ${err}`
         console.log(message)
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success, message, data})
+        return
     }
 })
 

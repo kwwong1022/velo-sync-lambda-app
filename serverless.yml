@@ -43,6 +43,26 @@ functions:
 
 resources:
   Resources:
+    VeloSyncVideoProcessTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: velo-sync-video-process-table-${sls:stage}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: userId-index
+            KeySchema:
+              - AttributeName: userId
+                KeyType: HASH
+            Projection:
+              ProjectionType: 'ALL'
+        BillingMode: PAY_PER_REQUEST
     VeloSyncStorageBucket:
       Type: AWS::S3::Bucket
       Properties:
