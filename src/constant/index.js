@@ -4,7 +4,7 @@ const stage = process.env.STAGE
 
 const S3_STORAGE_BUCKET = `velo-sync-storage-bucket-${stage}`
 
-const SIGNED_URL_EXPIRY_TIME = 3600
+const SIGNED_URL_EXPIRY_TIME = 900
 
 const LAMBDA_VIDEO_PROCESSOR = `velo-sync-video-processor-${stage}`
 
