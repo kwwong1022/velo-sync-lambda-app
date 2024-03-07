@@ -5,7 +5,8 @@ const { PutItemCommand } = require("@aws-sdk/client-dynamodb")
 
 const { 
     LAMBDA_VIDEO_PROCESSOR,
-    VIDEO_PROCESS_TABLE
+    VIDEO_PROCESS_TABLE,
+    VIDEO_PROCESS_STATUS_IN_PROGRESS,
 } = require('../constant')
 
 const createVideoProcessJob = async (processId, userId, videoKey, gpxKey, styleKey) => {
@@ -13,6 +14,7 @@ const createVideoProcessJob = async (processId, userId, videoKey, gpxKey, styleK
 
     const item = {
         id: { S: processId },
+        status: { S: VIDEO_PROCESS_STATUS_IN_PROGRESS },
         userId: { S: userId },
         videoKey: { S: videoKey },
         gpxKey: { S: gpxKey },
