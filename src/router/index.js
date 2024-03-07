@@ -20,15 +20,28 @@ router.get('/status', (req, res) => {
  *     description: Generate signed s3 url for uploading file
  */
 router.post('/s3/generate-signed-url', async (req, res) => {
+    let success = false, message = 'Signed URL generated successfully.', data = null
+
     const { filename } = req.body
 
-    const signedUrl = await getSignedUploadUrl(filename)
+    if (!filename) {
+        message = 'Operation failed. File name is missing.'
+        res.status(StatusCodes.BAD_REQUEST).json({success, message, data})
+        return
+    }
 
-    res.status(StatusCodes.OK).json({
-        success: true,
-        message: 'Signed URL generated successfully.',
-        data: { signedUrl },
-    })
+    try {
+        const signedUrl = await getSignedUploadUrl(filename)
+
+        success = true
+        data = { signedUrl }
+        res.status(StatusCodes.OK).json({success, message, data})
+
+    } catch (err) {
+        message = `System call [getSignedUploadUrl] failed. ${err}`
+        console.log(message)
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success, message, data})
+    }
 })
 
 module.exports = router
