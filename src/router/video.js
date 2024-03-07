@@ -27,7 +27,14 @@ router.post('/process', async (req, res) => {
     const processId = uuidv4()
 
     try {
-        await createVideoProcessJob(processId, userId, videoKey, gpxKey, styleKey)
+        const response = await createVideoProcessJob(processId, userId, videoKey, gpxKey, styleKey)
+
+        if (response.$metadata.httpStatusCode !== 200) {
+            message = `System call [createVideoProcessJob] failed. ${err}`
+            console.log(message)
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success, message, data})
+            return
+        }
 
     } catch (err) {
         message = `System call [createVideoProcessJob] failed. ${err}`
@@ -37,7 +44,14 @@ router.post('/process', async (req, res) => {
     }
 
     try {
-        invokeVideoProcessor(processId)
+        const response = await invokeVideoProcessor(processId)
+
+        if (response.$metadata.httpStatusCode !== 202) {
+            message = `System call [invokeVideoProcessor] failed. ${err}`
+            console.log(message)
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success, message, data})
+            return
+        }
 
         success = true
         data = { processId }

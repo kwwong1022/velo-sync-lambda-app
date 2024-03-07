@@ -37,7 +37,8 @@ const invokeVideoProcessor = async (processId) => {
 
     const command = new InvokeCommand(params)
 
-    lambda.send(command)
+    const response = await lambda.send(command)
+    return response
 }
 
 module.exports = {
