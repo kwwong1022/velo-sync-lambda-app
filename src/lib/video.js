@@ -35,6 +35,7 @@ const invokeVideoProcessor = async (processId) => {
     const params = {
         FunctionName: LAMBDA_VIDEO_PROCESSOR,
         InvocationType: "Event",
+        Payload: JSON.stringify({ processId })
     }
 
     const command = new InvokeCommand(params)
